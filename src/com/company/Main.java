@@ -42,6 +42,8 @@ public class Main {
 
 
 
+
+
             //System.out.println(((Automobile)transports.get(1)).getName());
 
             Iterator<? super Transport> transportIterator = transports.iterator();
