@@ -6,14 +6,18 @@ public abstract class Player {
     private ArrayList<PlayList> playLists;
     private String name;
 
+    public Player(){
+        playLists = new ArrayList<PlayList>();
+    }
+
     public void play(Track track) throws AudioFormatException{
         track.info();
         System.out.print("<< PLAY >>");
     }
 
-    public void createPlayList(String name, Track ...tracks){
-        playLists = new ArrayList<PlayList>();
-        PlayList playList = new PlayList(name);
+    public void createPlayList(Track ...tracks){
+        PlayList playList = new PlayList();
+        playList.setName("playlist_"+playLists.size());
         if(tracks.length > 0){
             for (Track track: tracks ) {
                 playList.addTrack(track);
@@ -22,11 +26,41 @@ public abstract class Player {
         playLists.add(playList);
     }
 
-    public ArrayList<PlayList> getPlayLists(){
+    public boolean createPlayList(String name, Track ...tracks){
+        int i = 0, size = playLists.size();
+        for ( i = 0; i< size; i++){
+            if (playLists.get(i).getName().equals(name))
+                break;
+        }
+        if(i < size){
+            return false;
+        }
+        PlayList playList = new PlayList(name);
+        if(tracks.length > 0){
+            for (Track track: tracks ) {
+                playList.addTrack(track);
+            }
+        }
+        playLists.add(playList);
+        return true;
+    }
+
+    public  ArrayList<PlayList> getPlayLists(){
         return playLists;
     }
 
-    public void addTrack(PlayList playList, Track track){
-        playList.addTrack(track);
+    public void showAllPlaylists(){
+        for (PlayList playList: playLists) {
+            System.out.println(playList.getName()+"\n");
+        }
+    }
+
+    public boolean addTrack(PlayList playList, Track ...tracks){
+        if(tracks.length == 0)
+            return false;
+        for (Track track:tracks) {
+            playList.addTrack(track);
+        }
+        return true;
     }
 }

@@ -6,6 +6,10 @@ public class PlayList {
     private String name;
     private ArrayList<Track> playList;
 
+    public PlayList(){
+        name = "";
+        playList = new ArrayList<>();
+    }
 
     public PlayList(String name){
         this.name = name;
@@ -16,6 +20,9 @@ public class PlayList {
 
     public String getName() {
         return name;
+    }
+    public void setName(String name){
+        this.name = name;
     }
 
     public void addTrack(Track track){

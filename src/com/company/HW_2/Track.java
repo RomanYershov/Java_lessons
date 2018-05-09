@@ -31,6 +31,26 @@ public  class Track {
         System.out.print("Title: "+title+" | "
                            +"Name: "+name+" | "
                               +"Group: "+group.getName()+" | "+format
-                                +"\n..................................\n");
+                                 +"\n..................................\n");
+    }
+
+    @Override
+    public int hashCode(){
+        return title.hashCode()+name.hashCode()
+                +group.hashCode()+format.hashCode()
+                +(int)time+year;
+    }
+
+    public boolean equals(Object obj){
+        if(obj == null)
+            return false;
+        if(obj.getClass() != getClass())
+            return false;
+        if(this == obj)
+            return true;
+        Track track = (Track)obj;
+        return track.title.equals(title)&&track.name.equals(name)
+                &&track.group.equals(group)&&track.year == year
+                &&track.time == time;
     }
 }
