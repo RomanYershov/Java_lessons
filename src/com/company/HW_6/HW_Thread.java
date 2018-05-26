@@ -1,5 +1,8 @@
 package com.company.HW_6;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 public class HW_Thread {
     private static Integer count = 0;
     public static void main(String[] args){
