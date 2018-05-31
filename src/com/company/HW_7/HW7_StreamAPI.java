@@ -11,7 +11,7 @@ public class HW7_StreamAPI {
     public static void main(String[] args) {
 
         Stream.iterate(200, n -> n + 2)
-                .limit(20).skip(10)
+                .limit(20).skip(10).sorted((o1, o2) -> o2.compareTo(o1))
                 .map(v -> {
                     char arr[] = Integer.toString(v).toCharArray();
                     char resArr[] = new char[arr.length];
