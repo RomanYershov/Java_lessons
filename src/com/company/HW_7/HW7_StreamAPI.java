@@ -1,17 +1,21 @@
 package com.company.HW_7;
 
 import java.lang.reflect.Array;
-import java.util.*;
 
+import java.util.*;
 import java.util.stream.Stream;
+import java.math.BigInteger;
+import java.util.Optional;
+import java.util.function.Supplier;
 
 public class HW7_StreamAPI {
 
 
     public static void main(String[] args) {
+        System.out.println("Exercise 1:\n");
 
         Stream.iterate(200, n -> n + 2)
-                .limit(20).skip(10).sorted((o1, o2) -> o2.compareTo(o1))
+                .limit(20).skip(10)
                 .map(v -> {
                     char arr[] = Integer.toString(v).toCharArray();
                     char resArr[] = new char[arr.length];
@@ -19,48 +23,32 @@ public class HW7_StreamAPI {
                         resArr[j++] = arr[i];
                     }
                     return new String(resArr);
-                }).forEach(System.out::println);
+                }).sorted((o1, o2) -> o2.compareTo(o1))
+                .forEach(System.out::println);
 
 
 
 
+        int sum = Stream.generate(
+                new Supplier<BigInteger>() {
+                    private BigInteger first = BigInteger.ZERO;
+                    private BigInteger second = BigInteger.ONE;
 
-   /*   Collections.reverse(Arrays.asList(arrStr));
-        for (String str: arrStr ) {
-            System.out.println(str);
-        }*/
-
-        /*for (int i = arrStr.length - 1; i >= 0; i-- ) {
-            System.out.println(arrStr[i]);
-        }*/
-
-
-        /*Integer a  =  Stream.iterate(1,n -> n + 1)
-        .limit(10).reduce(1,(n,n2) -> n + n2);
-
-        Stream.generate(() -> {
-
-            return 1 ;
-        });
-
-        System.out.println(a);*/
-
-        String[] strings = new String[]{"hello", "my", "friends"};
-
-        Sorted sorted = (String[] strings1) -> {
-            Collections.reverse(Arrays.asList(strings1));
-            return strings1;
-        };
-
-        for (String str : sorted.sortArray(strings)) {
-            System.out.println(str);
-        }
+                    @Override
+                    public BigInteger get() {
+                        BigInteger newValue = first.add(second);
+                        first = second;
+                        second = newValue;
+                        return newValue;
+                    }
+                }).mapToInt(BigInteger::intValue)
+                .filter(val -> val % 2 == 0)
+                .limit(10)
+                .sum();
 
 
+        System.out.println("\nExercise 2: sum = "+sum);
     }
-
 }
 
-interface Sorted {
-    String[] sortArray(String[] strings);
-}
+

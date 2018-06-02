@@ -12,31 +12,33 @@ import java.util.Map;
 public class Server {
 
     public static void main(String[] args) {
+
         try {
             ServerSocket serverSocket = new ServerSocket(11000);
+            ServerThread serverThread = new ServerThread(serverSocket);
+            while (true)
+                new Thread(serverThread).start();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ServerThread serverThread = new ServerThread(new Socket());
-        new Thread(serverThread).start();
+
     }
 }
 
 class ServerThread implements Runnable {
     private Socket accept;
+    private ServerSocket server;
 
-    public ServerThread(Socket socket) {
-        accept = socket;
+    public ServerThread(ServerSocket server) {
+        this.server = server;
     }
 
     @Override
     public void run() {
-        ServerSocket server;
-        Map<String, String> stringMap = new HashMap<>();
-        stringMap.put("Hello", "Hi");
-        stringMap.put("blablabla", "aaaaaaa");
+//        Map<String, String> stringMap = new HashMap<>();
+//        stringMap.put("Hello", "Hi");
+//        stringMap.put("blablabla", "aaaaaaa");
         try {
-            server = new ServerSocket(11000);
             accept = server.accept();
             while (true) {
                 try (
@@ -50,7 +52,7 @@ class ServerThread implements Runnable {
                             writer.println("bye");
                             break;
                         } else {
-                            writer.println("Server return: " + stringMap.get(message));
+                            writer.println("Server return: " + message);
                         }
                     }
                 }
