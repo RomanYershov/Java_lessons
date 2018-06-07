@@ -25,7 +25,7 @@ public class HW5 {
                 Files.copy(path, Paths.get("resources/folder 2/"
                         +String.valueOf(path.getFileName()).replace(".txt","_folder 2.txt")));
 
-                 Files.copy(path, Paths.get("resources/folder 3/folder 3.1/file.txt"));
+                 Files.copy(path, Paths.get("resources/folder 3/folder 3.1/file_folder 3.1.txt"));
     }
 
     static void createdTreeDir(String path, String folderName, int colSubDir) throws IOException {
