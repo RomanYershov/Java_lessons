@@ -6,7 +6,7 @@ import java.net.SocketAddress;
 
 public class Client {
     public static void main(String[]args){
-        try (Socket client = new Socket("127.0.0.1", 11000);
+        try (Socket client = new Socket("192.168.43.83", 11000);
              PrintWriter server = new PrintWriter(client.getOutputStream(), true);
              BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
              BufferedReader fromUser = new BufferedReader(new InputStreamReader(System.in));) {
