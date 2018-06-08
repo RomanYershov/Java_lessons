@@ -9,23 +9,23 @@ import java.util.Arrays;
 
 public class HW5 {
     public static void main(String[] args) throws IOException {
-        createdTreeDir("resources", "folder 1", 3);
+       /* createdTreeDir("resources", "folder 1", 3);
         createdTreeDir("resources/folder 1/folder 1.3", "folder 1.3.1", 0);
         createdTreeDir("resources/folder 1/folder 1.3/folder 1.3.1", "folder 1.3.4", 0);
         createdTreeDir("resources", "folder 2", 0);
         createdTreeDir("resources", "folder 3", 1);
 
-        Path path = Files.createFile(Paths.get("resources\\folder 1\\folder 1.3\\folder 1.3.1\\folder 1.3.4\\file.txt"));
+        Path path = Files.createFile(Paths.get("resources\\folder 1\\folder 1.3\\folder 1.3.1\\folder 1.3.4\\file.txt"));*/
 
         String str = getStructureDir(Paths.get("resources"), new StringBuilder());
         System.out.println(str);
-        Files.write(path , Arrays.asList(str),StandardOpenOption.TRUNCATE_EXISTING);
+       /* Files.write(path, Arrays.asList(str), StandardOpenOption.TRUNCATE_EXISTING);
 
         Path file3 =
                 Files.copy(path, Paths.get("resources/folder 2/"
-                        +String.valueOf(path.getFileName()).replace(".txt","_folder 2.txt")));
+                        + String.valueOf(path.getFileName()).replace(".txt", "_folder 2.txt")));
 
-                 Files.copy(path, Paths.get("resources/folder 3/folder 3.1/file_folder 3.1.txt"));
+        Files.copy(path, Paths.get("resources/folder 3/folder 3.1/file_folder 3.1.txt"));*/
     }
 
     static void createdTreeDir(String path, String folderName, int colSubDir) throws IOException {
@@ -49,10 +49,14 @@ public class HW5 {
                 ) {
             if (Files.isDirectory(item)) {
                 dir = item;
-                //long size = Files.list(item).count();
-                stringBuilder.append(item.getFileName() + "\n");
-                getStructureDir(dir, stringBuilder);
-            } else if(Files.isRegularFile(item)){
+                long size = Files.list(item).count();
+                if (size > 0) {
+                    stringBuilder.append(item.getFileName() + "\t");
+                    getStructureDir(dir, stringBuilder);
+                } else {
+                    stringBuilder.append(item.getFileName() + "\n");
+                }
+            } else if (Files.isRegularFile(item)) {
                 stringBuilder.append(item.getFileName() + "\n");
             }
         }

@@ -1,3 +1,4 @@
+/*
 package com.company.database_connect_lesson;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
@@ -15,7 +16,8 @@ public class MSSqlDemo {
     public static void main(String[] args) throws SQLException {
 
 
-       /* SQLServerDriver sqlServerDriver = new SQLServerDriver();
+       */
+/* SQLServerDriver sqlServerDriver = new SQLServerDriver();
         DriverManager.registerDriver(sqlServerDriver);
         Connection connection = DriverManager.getConnection("jdbc:sqlserver://172.27.61.83;databaseName=PEP_161;integratedSecurity=true");
 
@@ -26,7 +28,8 @@ public class MSSqlDemo {
 
         while (resultSet.next()){
             System.out.println(resultSet.getString(1));
-        }*/
+        }*//*
+
 
         SQLServerDataSource dataSource = new SQLServerDataSource();
         dataSource.setIntegratedSecurity(true);
@@ -34,15 +37,20 @@ public class MSSqlDemo {
         dataSource.setDatabaseName("PEP_161");
 
         Connection connection = dataSource.getConnection();
-       /*
+       */
+/*
         Statement statement = connection.createStatement();
-        statement.executeUpdate(Insert);*/
+        statement.executeUpdate(Insert);*//*
 
 
-      /*  while (resultSet.next()){
+
+      */
+/*  while (resultSet.next()){
             System.out.println(resultSet.getString(1));
-        }*/
-       /* PreparedStatement preparedStatement =
+        }*//*
+
+       */
+/* PreparedStatement preparedStatement =
                 connection.prepareStatement(" select firstName from Students where LEN(firstName) >= ?"
                         ,ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         preparedStatement.setString(1, Integer.toString(new Scanner(System.in).nextInt()));
@@ -55,7 +63,8 @@ public class MSSqlDemo {
             System.out.println(resultSet.getString(1));
 //            resultSet.updateString(1, "Egor");
 
-        }*/
+        }*//*
+
 
         Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
         statement.execute("Select * from Students");
@@ -73,3 +82,4 @@ public class MSSqlDemo {
 
 
 }
+*/
